@@ -1,0 +1,20 @@
+server:
+  port: 9002
+dubbo:
+  application:
+    name: checkup_controller
+  protocol:
+    name: dubbo
+    port: 20881
+  registry:
+    protocol: zookeeper
+    address: 39.107.239.26:2181,39.107.239.26:2182,39.107.239.26:2183
+  scan:
+    base-packages: com.checkup.controller
+spring:
+  redis:
+    host: 39.107.239.26
+  devtools:
+    restart:
+      enabled: true
+      additional-exclude: src/main/java

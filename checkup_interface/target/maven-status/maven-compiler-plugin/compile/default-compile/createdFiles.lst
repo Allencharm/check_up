@@ -1,0 +1,16 @@
+com\checkup\service\TMenuService.class
+com\checkup\service\TRoleService.class
+com\checkup\service\TUserService.class
+com\checkup\service\TMemberService.class
+com\checkup\service\TSetmealCheckgroupService.class
+com\checkup\service\TCheckgroupCheckitemService.class
+com\checkup\service\TOrdersettingService.class
+com\checkup\service\TUserRoleService.class
+com\checkup\service\TCheckgroupService.class
+com\checkup\service\TOrderService.class
+com\checkup\service\UserService.class
+com\checkup\service\TSetmealService.class
+com\checkup\service\TRoleMenuService.class
+com\checkup\service\TPermissionService.class
+com\checkup\service\TCheckitemService.class
+com\checkup\service\TRolePermissionService.class

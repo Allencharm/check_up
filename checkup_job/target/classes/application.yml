@@ -1,0 +1,8 @@
+spring:
+  redis:
+    host: 39.107.239.26
+    port: 6379
+    password: redis123
+server:
+  port: 9003
+setmeal_img_path: C:\Users\dell\Desktop\checkup

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="checkup_utils" />
+        <module name="checkup_pojo" />
+        <module name="checkup_mobile" />
+        <module name="checkup_provider" />
+        <module name="checkup_job" />
+        <module name="checkup_controller" />
+        <module name="checkup_interface" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="checkup_controller" target="1.8" />
+      <module name="checkup_interface" target="1.8" />
+      <module name="checkup_job" target="1.8" />
+      <module name="checkup_mobile" target="1.8" />
+      <module name="checkup_parent" target="1.8" />
+      <module name="checkup_pojo" target="1.8" />
+      <module name="checkup_provider" target="1.8" />
+      <module name="checkup_utils" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="checkup_controller" options="-parameters" />
+      <module name="checkup_interface" options="-parameters" />
+      <module name="checkup_job" options="-parameters" />
+      <module name="checkup_mobile" options="-parameters" />
+      <module name="checkup_parent" options="-parameters" />
+      <module name="checkup_pojo" options="-parameters" />
+      <module name="checkup_provider" options="-parameters" />
+      <module name="checkup_utils" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/checkup_controller/checkup_controller.iml" filepath="$PROJECT_DIR$/checkup_controller/checkup_controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/checkup_interface/checkup_interface.iml" filepath="$PROJECT_DIR$/checkup_interface/checkup_interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/checkup_job/checkup_job.iml" filepath="$PROJECT_DIR$/checkup_job/checkup_job.iml" />
+      <module fileurl="file://$PROJECT_DIR$/checkup_mobile/checkup_mobile.iml" filepath="$PROJECT_DIR$/checkup_mobile/checkup_mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/checkup_parent.iml" filepath="$PROJECT_DIR$/checkup_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/checkup_pojo/checkup_pojo.iml" filepath="$PROJECT_DIR$/checkup_pojo/checkup_pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/checkup_provider/checkup_provider.iml" filepath="$PROJECT_DIR$/checkup_provider/checkup_provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/checkup_utils/checkup_utils.iml" filepath="$PROJECT_DIR$/checkup_utils/checkup_utils.iml" />
+    </modules>
+  </component>
+</project>
