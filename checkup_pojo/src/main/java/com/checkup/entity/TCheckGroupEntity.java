@@ -1,6 +1,7 @@
 package com.checkup.entity;
 
 import com.checkup.pojo.TCheckgroup;
+import com.checkup.pojo.TCheckitem;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,5 +18,7 @@ import java.util.List;
 public class TCheckGroupEntity extends TCheckgroup {
 
     private List<Object> checkitemIds;
+
+    private List<TCheckitem>checkItems;
 
 }

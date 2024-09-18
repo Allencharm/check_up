@@ -26,4 +26,6 @@ public interface TSetmealService extends IService<TSetmeal> {
     TSetmealEntity findOne(int setmealId);
 
     void updateById(TSetmeal tSetmeal, int[] groupIds, String img);
+
+    TSetmealEntity findInfoById(int id);
 }

@@ -5,12 +5,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.checkup.bean.QueryPageBean;
-import com.checkup.dao.TSetmealCheckgroupMapper;
+import com.checkup.dao.*;
+import com.checkup.entity.TCheckGroupEntity;
 import com.checkup.entity.TSetmealEntity;
-import com.checkup.pojo.TCheckgroup;
-import com.checkup.pojo.TSetmeal;
-import com.checkup.dao.TSetmealMapper;
-import com.checkup.pojo.TSetmealCheckgroup;
+import com.checkup.pojo.*;
 import com.checkup.service.TCheckgroupService;
 import com.checkup.service.TSetmealService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -21,7 +19,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -42,6 +42,13 @@ public class TSetmealServiceImpl extends ServiceImpl<TSetmealMapper, TSetmeal> i
 
     @Value("${setmeal_img_path}")
     private String path;
+
+    @Autowired
+    private TCheckgroupMapper tCheckgroupMapper;
+    @Autowired
+    private TCheckitemMapper tCheckitemMapper;
+    @Autowired
+    private TCheckgroupCheckitemMapper tCheckgroupCheckitemMapper;
 
     @Override
     public IPage<TSetmeal> findPage(QueryPageBean pageBean) {
@@ -118,5 +125,49 @@ public class TSetmealServiceImpl extends ServiceImpl<TSetmealMapper, TSetmeal> i
             tSetmealCheckgroupMapper.insert(tSetmealCheckgroup);
         }
         tSetmealMapper.updateById(setmeal);
+    }
+
+    //主键查询套餐详情，包括套餐所包含的检查组以及检查组所包含的检查项
+    @Override
+    public TSetmealEntity findInfoById(int id) {
+        //套餐信息
+        TSetmeal tSetmeal = tSetmealMapper.selectById(id);
+        //检查组信息
+
+        //从套餐和检查组中间表查询一组检查组id
+        LambdaQueryWrapper<TSetmealCheckgroup>setmealCheckgroupLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        setmealCheckgroupLambdaQueryWrapper.eq(TSetmealCheckgroup::getSetmealId,id);
+        setmealCheckgroupLambdaQueryWrapper.select(TSetmealCheckgroup::getCheckgroupId);
+        List<Integer> checkgroupIds = tSetmealCheckgroupMapper.selectObjs(setmealCheckgroupLambdaQueryWrapper).stream().map(o -> (int)o).collect(Collectors.toList());
+
+        List<TCheckGroupEntity>groupEntityList = new ArrayList<>();
+        for(int cgid : checkgroupIds){
+            //在检查组和检查项中间表查询一组检查项id
+            LambdaQueryWrapper<TCheckgroupCheckitem>checkgroupCheckitemLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            checkgroupCheckitemLambdaQueryWrapper.eq(TCheckgroupCheckitem::getCheckgroupId,cgid);
+            checkgroupCheckitemLambdaQueryWrapper.select(TCheckgroupCheckitem::getCheckitemId);
+            List<Integer> itemids = tCheckgroupCheckitemMapper.selectObjs(checkgroupCheckitemLambdaQueryWrapper).stream().map(o -> (int) o).collect(Collectors.toList());
+            //根据一组检查项id，查询检查项信息
+            List<TCheckitem> tCheckitems = tCheckitemMapper.selectBatchIds(itemids);
+
+            //根据检查组id查询检查组信息
+            TCheckgroup tCheckgroup = tCheckgroupMapper.selectById(cgid);
+            TCheckGroupEntity groupEntity = new TCheckGroupEntity();
+            BeanUtils.copyProperties(tCheckgroup,groupEntity);
+
+            //把一组检查项信息放入检查组
+            groupEntity.setCheckItems(tCheckitems);
+
+            //把检查组对象放入检查组集合
+            groupEntityList.add(groupEntity);
+        }
+        //检查项信息
+
+        TSetmealEntity entity = new TSetmealEntity();
+        BeanUtils.copyProperties(tSetmeal,entity);
+
+        entity.setCheckGroups(groupEntityList);
+
+        return entity;
     }
 }

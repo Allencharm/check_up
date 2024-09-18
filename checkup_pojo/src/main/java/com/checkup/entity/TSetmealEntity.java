@@ -15,4 +15,5 @@ import java.util.List;
 @Data
 public class TSetmealEntity extends TSetmeal {
     private List<Object> checkgroupIds;
+    private List<TCheckGroupEntity>checkGroups;
 }
